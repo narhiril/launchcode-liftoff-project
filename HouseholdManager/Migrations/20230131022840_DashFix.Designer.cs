@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseholdManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
     [Migration("20230131022840_DashFix")]
     partial class DashFix
+========
+    [Migration("20230201034523_IconCharacterFix")]
+    partial class IconCharacterFix
+>>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,12 +35,188 @@ namespace HouseholdManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+========
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HouseholdId"), 1L, 1);
+
+                    b.Property<string>("HouseholdName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("HouseholdId");
+
+                    b.ToTable("Households");
+
+                    b.HasData(
+                        new
+                        {
+                            HouseholdId = 1,
+                            HouseholdName = "DefaultHousehold",
+                            Icon = ""
+                        });
+                });
+
+            modelBuilder.Entity("HouseholdManager.Models.Member", b =>
+                {
+                    b.Property<int>("MemberId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberId"), 1L, 1);
+
+                    b.Property<int>("HouseholdId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("MemberType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MemberId");
+
+                    b.HasIndex("HouseholdId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Members");
+
+                    b.HasData(
+                        new
+                        {
+                            MemberId = 1,
+                            HouseholdId = 1,
+                            Icon = "👩‍🔧",
+                            MemberType = "Admin",
+                            UserName = "defaultAdmin@yahoo.com"
+                        },
+                        new
+                        {
+                            MemberId = 2,
+                            HouseholdId = 1,
+                            Icon = "👩‍💼",
+                            MemberType = "Member",
+                            UserName = "defaultUser@yahoo.com"
+                        });
+                });
+
+            modelBuilder.Entity("HouseholdManager.Models.Mission", b =>
+                {
+                    b.Property<int>("MissionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MissionId"), 1L, 1);
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MissionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MissionId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Missions");
+
+                    b.HasData(
+                        new
+                        {
+                            MissionId = 1,
+                            Completed = false,
+                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9822),
+                            MemberId = 2,
+                            MissionName = "Wash dishes",
+                            Point = 2,
+                            RoomId = 1
+                        },
+                        new
+                        {
+                            MissionId = 2,
+                            Completed = false,
+                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9860),
+                            MemberId = 1,
+                            MissionName = "Make bed",
+                            Point = 1,
+                            RoomId = 5
+                        },
+                        new
+                        {
+                            MissionId = 3,
+                            Completed = false,
+                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9870),
+                            MemberId = 2,
+                            MissionName = "Make bed",
+                            Point = 1,
+                            RoomId = 3
+                        },
+                        new
+                        {
+                            MissionId = 4,
+                            Completed = false,
+                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9879),
+                            MemberId = 1,
+                            MissionName = "Mow lawn",
+                            Point = 5,
+                            RoomId = 9
+                        },
+                        new
+                        {
+                            MissionId = 5,
+                            Completed = false,
+                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9889),
+                            MemberId = 1,
+                            MissionName = "Make dinner",
+                            Point = 4,
+                            RoomId = 1
+                        });
+                });
+
+            modelBuilder.Entity("HouseholdManager.Models.Room", b =>
+                {
+                    b.Property<int>("RoomId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"), 1L, 1);
+>>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -431,6 +612,110 @@ namespace HouseholdManager.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
+<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
+========
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a1addd14-6340-4840-95c2-db12554843e5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ab3eeed0-defd-41e9-b1bd-36661b62829d",
+                            Email = "defaultAdmin@yahoo.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "DEFAULTADMIN@YAHOO.COM",
+                            NormalizedUserName = "DEFAULTADMIN@YAHOO.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENFo9vgxEGXoObDLtNeg1E4EAhglostSfvFOkO49dwmG408JAN2qbOfAk4yM/8pG+A==",
+                            PhoneNumber = "111-222-3333",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8bbd6713-9a6a-4572-a0a2-7f159540fba0",
+                            TwoFactorEnabled = false,
+                            UserName = "defaultAdmin@yahoo.com"
+                        },
+                        new
+                        {
+                            Id = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "87e350eb-1d91-4711-96d9-f9c46cf314fe",
+                            Email = "defaultUser@yahoo.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "DEFAULTUSER@YAHOO.COM",
+                            NormalizedUserName = "DEFAULTUSER@YAHOO.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK5S9m0kGIvt8YgHuLX9cGIRE8T2ZlaAZJL8V3rcHEh+EHGunYODzGG/LClIuugq6w==",
+                            PhoneNumber = "111-222-3333",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "33ca19e6-a47d-4a14-b372-519aa161a80d",
+                            TwoFactorEnabled = false,
+                            UserName = "defaultUser@yahoo.com"
+                        });
+                });
+
+>>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")

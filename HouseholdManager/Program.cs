@@ -3,6 +3,9 @@ using HouseholdManager.Data.Interfaces;
 using HouseholdManager.Data.Services;
 using HouseholdManager.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +26,8 @@ builder.Services.AddIdentity<Member, IdentityRole>(options => options.SignIn.Req
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IQueryMembers, MemberService>();
 builder.Services.AddScoped<IRequestIcons, IconService>();
+
+builder.Services.AddSingleton<ITagHelperInitializer<ScriptTagHelper>, ScriptsDefaultAppendVersion>();
 
 //Register Syncfusion license
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VVhkQlFadVdJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRjWH5ZcHBRRmRbVE0=");

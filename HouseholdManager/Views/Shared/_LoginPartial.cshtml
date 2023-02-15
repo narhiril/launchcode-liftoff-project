@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using System.Text;
 
 @inject SignInManager<Member> SignInManager
 @inject UserManager<Member> UserManager
@@ -11,13 +12,29 @@
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
-{
+    {
+        //Arbitrary length cutoff to prevent odd navbar scaling
+        const int lengthCutoff = 20;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append(UserManager.GetUserName(User));
+        // +3 to account for the "..." that would be added, prevents truncations like "defaultAdmin@yahoo.co..."
+        if (stringBuilder.Length > lengthCutoff + 3)
+        {
+            stringBuilder.Remove(lengthCutoff - 1, (stringBuilder.Length - lengthCutoff + 1));
+            stringBuilder.Append("...");
+        }
+        string userName = stringBuilder.ToString();
+
+        <li class="nav-item">
+        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@userName</a>
+/*
     <li class="nav-item">
             <a id="editMemberProfile" class="nav-link" asp-action="EditProfile" asp-controller="Member" title="Profile">
             <text class="icon-font">@userIcon </text>@displayName</a>
     </li>
     <li class="nav-item">
         <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
+*/
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

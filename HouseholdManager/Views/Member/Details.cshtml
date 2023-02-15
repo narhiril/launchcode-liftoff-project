@@ -1,0 +1,69 @@
+﻿@model HouseholdManager.Models.Member
+@using HouseholdManager.Data.API
+
+@{
+    ViewData["Title"] = "Member Details";
+    var req = new IconRequestor();
+    string iconMouseOverText = await req.GetMouseoverTextForIcon(ViewData.Model.Icon,
+                                                                 (IEnumerable<Icon>)ViewBag.Icons);
+}
+
+<h1>Member Details</h1>
+@await Html.PartialAsync("_CreationButtonsPartial")
+
+<div>
+    <hr class="homepage-break">
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Icon)
+        </dt>
+        <dd class="col-sm-10" title=@iconMouseOverText>
+            <span>
+                <label class="icon-font">@Html.DisplayFor(model => model.Icon)</label>
+                <label class="icon-slug-display-small">@iconMouseOverText</label>
+            </span>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Household.HouseholdName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Household.HouseholdNameWithIcon)
+        </dd>
+    </dl>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="p-4">
+            <h5 class="fw-bold">@Model.MemberUserNameWithIcon's Missions</h5>
+
+
+            <div class="control-section">
+
+                    <ejs-grid id="mission" dataSource="@ViewBag.AllMissions" gridLines="None"
+                      allowSorting="true" allowPaging="true">
+                <e-grid-pagesettings pageSize="5"></e-grid-pagesettings>
+                    <e-grid-columns>
+                        <e-grid-column headerText="Room" field="RoomNameWithIcon" width="15%"></e-grid-column>
+                        <e-grid-column field="@ViewBag.missionName" headerText="Mission Name"></e-grid-column>
+                        <e-grid-column field="DueDate" headerText="Due Date" format="MMM-dd-yyyy" width="20%"></e-grid-column>
+                        <e-grid-column headerText="Completed" template="#actionYesNoTemplate" width="20%" textAlign="Center"></e-grid-column>
+                    </e-grid-columns>
+
+
+                </ejs-grid>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <a asp-action="AddOrEdit" asp-route-id="@Model?.MemberId" class="btn btn-success form-button"> <i class="fa-solid fa-pen-to-square"></i> Edit</a>
+    <a asp-action="Index" class="btn btn-secondary form-button"> <i class="fa-solid fa-arrow-left"></i> Back to List</a>
+</div>

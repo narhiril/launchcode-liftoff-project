@@ -33,7 +33,7 @@ namespace HouseholdManager.Migrations
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -81,7 +81,7 @@ namespace HouseholdManager.Migrations
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -187,6 +187,9 @@ namespace HouseholdManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
@@ -198,6 +201,7 @@ namespace HouseholdManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Point")
@@ -283,10 +287,11 @@ namespace HouseholdManager.Migrations
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");

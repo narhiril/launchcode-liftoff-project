@@ -101,7 +101,8 @@ namespace HouseholdManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("Id,MemberType,Icon,HouseholdId,DisplayName")] Member member)
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> AddOrEdit([Bind("MemberId,MemberType,Icon,HouseholdId,UserName,Completed")] Member member)
         {
             if (ModelState.IsValid)
             {
@@ -139,7 +140,6 @@ namespace HouseholdManager.Controllers
         }
         */
 
-        // TODO: Call this from an admin-only action method
         [NonAction]
         public void PopulateHouseholds()
         {

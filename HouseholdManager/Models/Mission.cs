@@ -13,7 +13,7 @@ namespace HouseholdManager.Models
 
         [Column(TypeName = "nvarchar(50)")]
 
-        [DisplayName("Mission Name")]
+        [Required(ErrorMessage = "Name of mission is required.")]
         public string Name { get; set; }
 
         [DisplayName("Room")]
@@ -31,9 +31,10 @@ namespace HouseholdManager.Models
         public string? MemberId { get; set; }
 
         public Member? Member { get; set; }
-
         public Household Household { get; set; }
         public int HouseholdId { get; set; }
+        public bool Completed { get; set; } = false;
+    }
 
     }
 

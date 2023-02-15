@@ -5,6 +5,7 @@ using HouseholdManager.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HouseholdManager.Models.ViewModels;
 
 namespace HouseholdManager.Controllers
 {

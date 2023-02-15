@@ -36,6 +36,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DueDate)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Completed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Completed)
+        </dd>
         <dt class="col-sm-8">
             @Html.DisplayNameFor(model => model.MemberName)
         </dt>
@@ -44,18 +50,10 @@
             @Html.DisplayFor(model => model.MemberName)
         </dd>
     </dl>
-
-    <div class="row mt-2">
-        <div class="col-md-6">
-            <div class="form-group">
-                <form asp-action="Delete">
-                    <input type="hidden" asp-for="Id" />
-                    <button type="submit" class="btn btn-danger w-100"> <i class="fa-solid fa-xmark"></i> Delete</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <a asp-action="Index" class="btn btn-secondary w-100"> <i class="fa-solid fa-arrow-left"></i> Back to List</a>
-        </div>
-    </div>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MissionId" />
+        <button type="submit" class="btn btn-danger mx-2"> <i class="fa-solid fa-xmark"></i> Delete</button>
+        <a asp-action="Index" class="btn btn-secondary mx-2"> <i class="fa-solid fa-arrow-left"></i> Back to List</a>
+    </form>
 </div>

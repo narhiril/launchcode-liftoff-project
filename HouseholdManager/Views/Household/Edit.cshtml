@@ -4,6 +4,10 @@
     ViewData["Title"] = "Edit Household";
 }
 
+
+<h3>@ViewData["Title"]</h3>
+@await Html.PartialAsync("_CreationButtonsPartial")
+
 <div class="row">
     <div class="col-md-7">
         <div class="widget p-5 bg-body-secondary">
@@ -16,10 +20,13 @@
                 <div class="mb-3">
                     <label asp-for="Icon" class="control-label"></label>
                     <input asp-for="Icon" id="iconInput" class="form-control" hidden />
-                    @await Html.PartialAsync("_IconMenuPartial")
+                    @await Html.PartialAsync("_IconMenuPartial", new ViewDataDictionary(ViewData){{"Icon", Model.Icon}})
                     <span asp-validation-for="Icon" class="text-danger" fs-6></span>
                 </div>
-                <ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-button"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <a asp-action="Index" class="btn btn-secondary form-button"> <i class="fa-solid fa-arrow-left"></i> Back to List</a>
+                </div>
             </form>
         </div>
     </div>
@@ -28,16 +35,6 @@
             <i class="fa-solid fa-person-shelter fa-2xl"></i>
         </div>
     </div>
-</div>
-
-<p>
-    <a asp-controller="Mission" asp-action="Create" class="btn btn-sm btn-success mx-2"> <i class="fa-solid fa-plus"></i> Create a Mission</a>
-    <a asp-controller="Room" asp-action="Create" class="btn btn-sm btn-success mx-2"> <i class="fa-solid fa-plus"></i> Create a Room</a>
-    <a asp-controller="Member" asp-action="AddOrEdit" class="btn btn-sm btn-success mx-2"> <i class="fa-solid fa-plus"></i> Invite a Member</a>
-</p>
-
-<div class="danger-zone">
-
 </div>
 
 @section Scripts {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,10 +18,13 @@ namespace HouseholdManager.Models
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        public string Name { get; set; } = "";
+        [Required(ErrorMessage = "Household name is required.")]
+        [StringLength(50, MinimumLength = 2)]
+        [DisplayName("Household Name")]
+        public string Name { get; set; } = string.Empty;
 
-        [Column(TypeName = "nvarchar(5)")]
-        public string Icon { get; set; } = "";
+        [Column(TypeName = "nvarchar(20)")]
+        public string Icon { get; set; } = string.Empty;
 
         public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }

@@ -4,8 +4,12 @@
     ViewData["Title"] = "Dashboard";
 }
 
+<h3>@ViewData["Title"]</h3>
 
 @*Summary Widgets*@
+
+@await Html.PartialAsync("_CreationButtonsPartial")
+
 <div class="row">
         <div class="col-md-12">
             <div class="p-4">
@@ -15,29 +19,38 @@
                       allowSorting="true" allowPaging="true">
                 <e-grid-pagesettings pageSize="5"></e-grid-pagesettings>
                 <e-grid-columns>
-                    <e-grid-column headerText="Due Date" field="DueDate" width="15%" textAlign="Left"></e-grid-column>
-                    <e-grid-column headerText="Mission Name" field="Name" width="20%" textAlign="Left"></e-grid-column>
+                    <e-grid-column headerText="Due Date" field="DueDate" width="12%" textAlign="Left"></e-grid-column>
+                    <e-grid-column headerText="Mission Name" field="Name" width="15%" textAlign="Left"></e-grid-column>
                     <e-grid-column headerText="Member" template="#memberNameTemplate" width="15%" textAlign="Left"></e-grid-column>
-                    <e-grid-column headerText="Room" template="#roomNameTemplate" width="20%" textAlign="Left"></e-grid-column>
+                    <e-grid-column headerText="Room" template="#roomNameTemplate" width="15%" textAlign="Left"></e-grid-column>
+                    <e-grid-column headerText="Completed" template="#actionYesNoTemplate" width="15%" textAlign="Center"></e-grid-column>
                     <e-grid-column headerText="Points" field="Point" width="90px" textAlign="Left" width="10%"></e-grid-column>
-                    <e-grid-column headerText="Actions" template="#actionColumnTemplate" width="20%"></e-grid-column>
+                    <e-grid-column headerText="Actions" template="#actionColumnTemplate" width="18%"></e-grid-column>
                 </e-grid-columns>
             </ejs-grid>
         </div>
 </div>
 
+<script id="roomNameTemplate" type="text/x-template">
+    <text class="icon-font">${RoomIcon}</text> <text>${RoomName}</text>
+</script>
+
 <script id="memberNameTemplate" type="text/x-template">
     <text class="icon-font">${MemberIcon}</text> <text>${MemberName}</text>
 </script>
 
-<script id="roomNameTemplate" type="text/x-template">
-    <text class="icon-font">${RoomIcon}</text> <text>${RoomName}</text>
+<script id="actionYesNoTemplate" type="text/x-template">
+    ${if(Completed==1)}
+        <span class="badge bg-success">Yes</span>
+    ${else}
+        <span class="badge bg-danger">No</span>
+        ${/if}
 </script>
 
 <script id="actionColumnTemplate" type="text/x-template">
     <div class="d-flex flex-row justify-content-start">
         <a class="btn btn-sm btn-primary mx-1" href="/Mission/Edit/${Id}">
-            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-pen fa-lg"></i>
         </a>
         <a class="btn btn-sm btn-secondary mx-1" href="/Mission/Details/${Id}">
             <i class="fa-solid fa-list-check"></i>
@@ -54,23 +67,63 @@
 
 @*Doughnut Chart*@
 
+@{
+    string[] colorPalette = {"var(--bs-primary-border-subtle)",
+                             "var(--bs-secondary-border-subtle)",
+                             "var(--bs-warning-border-subtle)",
+                             "var(--bs-danger-border-subtle)",
+                             "var(--bs-option-border-subtle)",
+                             "var(--bs-accent-border-subtle)",
+                             "var(--bs-info-border-subtle)",
+                             "var(--bs-success-border-subtle)"};
+}
+
     <div class="col-md-12">
         <div class="widget chart">
             <div class="p-4">
                 <h5 class="fw-bold">Points by Member:</h5>
             </div>
-            <ejs-accumulationchart id="doughnutchart" enableSmartLabels>
+            <ejs-accumulationchart id="doughnutchart" background="var(--bs-body-bg)" enableSmartLabels>
                 <e-accumulation-series-collection>
-                    <e-accumulation-series dataSource="@(List<DashboardViewModel>)ViewBag.DoughnutChartData"
-                            xName="MemberName" yName="Amount" innerRadius="40%" legendShape="Circle">
-                        <e-accumulationseries-datalabel name="FormattedAmount" visible></e-accumulationseries-datalabel>
+                <e-accumulation-series palettes="@colorPalette" dataSource="@(List<DashboardViewModel>)ViewBag.DoughnutChartData"
+                            xName="memberNameWithIcon" yName="amount" innerRadius="40%" legendShape="Circle">
+                        <e-accumulationseries-datalabel name="formattedAmount" visible></e-accumulationseries-datalabel>
                     </e-accumulation-series>
                 </e-accumulation-series-collection>
                 <e-accumulationchart-legendsettings position="Top">
-                    <e-legendsettings-textstyle  color="var(--bs-heading-color)" size="1rem"></e-legendsettings-textstyle>
+                    <e-legendsettings-textstyle color="var(--bs-emphasis-color)" size="1rem"></e-legendsettings-textstyle>
                 </e-accumulationchart-legendsettings>
                 <e-accumulationchart-tooltipsettings enable></e-accumulationchart-tooltipsettings>
             </ejs-accumulationchart>
         </div>
     </div>   
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="p-4">
+            <h5 class="fw-bold">Rooms with due dates:</h5>
+
+
+    <div class="control-section">      
+
+            <ejs-grid id="mission" dataSource="@ViewBag.AllMissions" allowGrouping="true" allowSorting="true" allowFiltering="true" allowPaging="true" showColumnMenu="true">
+               <e-grid-filterSettings type="CheckBox"></e-grid-filterSettings>
+                <e-grid-groupsettings showGroupedColumn="true"></e-grid-groupsettings>
+                <e-grid-columns>
+                <e-grid-column headerText="Room" field="RoomName" width="15%"></e-grid-column>
+                <e-grid-column field="MissionName" headerText="Mission"></e-grid-column>
+                <e-grid-column field="DueDate" headerText="Due Date" format="MMM-dd-yyyy" width="20%"></e-grid-column>
+                <e-grid-column headerText="Completed" template="#actionYesNoTemplate" width="20%" textAlign="Center"></e-grid-column>
+            </e-grid-columns>
+
+
+            </ejs-grid>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+    

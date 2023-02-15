@@ -14,9 +14,9 @@
                   allowSorting="true" allowPaging="true">
             <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
             <e-grid-columns>
-                <e-grid-column headerText="Household Name" field="NameWithIconHtml" :disableHtmlEncode="false"></e-grid-column>
+                <e-grid-column headerText="Household Name" template="#householdNameTemplate" width="75%px"></e-grid-column>
                
-                <e-grid-column headerText="Actions" template="#actionColumnTemplate" width="100px"></e-grid-column>
+                <e-grid-column headerText="Actions" template="#actionColumnTemplate" width="25%"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
 
@@ -28,16 +28,23 @@
     </div>
 </div>
 
+<script id="householdNameTemplate" type="text/x-template">
+    <text class="icon-font">${Icon}</text> <text>${Name}</text>
+</script>
+
 <script id="actionColumnTemplate" type="text/x-template">
     <div class="d-flex flex-row justify-content-start">
-        <a class="btn btn-sm btn-secondary" href="/Household/Edit/${Id}">
-            <i class="fa-solid fa-pen fa-lg text-body-secondary"></i>
+        <a class="btn btn-sm btn-primary mx-1" href="/Household/AddOrEdit/${Id}">
+            <i class="fa-solid fa-pen fa-lg"></i>
+        </a>
+        <a class="btn btn-sm btn-secondary mx-1" href="/Household/Details/${Id}">
+            <i class="fa-solid fa-list-check"></i>
         </a>
         <form action="/Household/Delete/${Id}" method="post">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-sm btn-danger"
-            onclick="return confirm(&quot;Are sure to delete this record?&quot;)">
-                <i class="fa-solid fa-trash-can fa-lg text-body-secondary"></i>
+    @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-warning mx-1"
+            onclick="return confirm(&quot;Are you sure you want to delete this record?&quot;)">
+                <i class="fa-solid fa-trash-can"></i>
             </button>
         </form>
     </div>
