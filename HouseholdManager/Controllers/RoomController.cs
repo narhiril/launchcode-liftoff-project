@@ -74,11 +74,11 @@ namespace HouseholdManager.Controllers
             List<Room> roomsToUpdate = new List<Room>();
             foreach (Room rm in allRooms)
             {
-                if (data.ContainsKey(rm.RoomId))
+                if (data.ContainsKey(rm.Id))
                 {
-                    if (rm.DirtLevel != data[rm.RoomId])
+                    if (rm.DirtLevel != data[rm.Id])
                     {
-                        rm.DirtLevel = data[rm.RoomId];
+                        rm.DirtLevel = data[rm.Id];
                         roomsToUpdate.Add(rm);
                     }
                 }
@@ -259,7 +259,7 @@ namespace HouseholdManager.Controllers
             var missionQuery = from mission in _context.Missions
                            where mission.RoomId == id
                            select mission;
-            //Check for missions in room and remove RoomId from those missions
+            //Check for missions in room and remove Id from those missions
             if (missionQuery.Any())
             {
                 foreach (Mission mission in missionQuery)

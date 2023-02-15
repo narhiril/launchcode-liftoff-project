@@ -102,7 +102,7 @@ namespace HouseholdManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> AddOrEdit([Bind("MemberId,MemberType,Icon,HouseholdId,UserName,Completed")] Member member)
+        public async Task<IActionResult> AddOrEdit([Bind("MemberId,MemberType,Icon,HouseholdId,MemberDisplayName,Completed")] Member member)
         {
             if (ModelState.IsValid)
             {

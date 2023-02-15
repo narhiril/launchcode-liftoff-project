@@ -37,6 +37,7 @@ namespace HouseholdManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
@@ -139,7 +140,7 @@ namespace HouseholdManager.Migrations
                         {
                             Id = "a1addd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1729b34-06ae-4d71-b95e-34a5910d9c74",
+                            ConcurrencyStamp = "1dd033ce-627f-479c-9152-9452d49fabbb",
                             DisplayName = "",
                             Email = "defaultAdmin@yahoo.com",
                             EmailConfirmed = false,
@@ -149,10 +150,10 @@ namespace HouseholdManager.Migrations
                             MemberType = "Admin",
                             NormalizedEmail = "DEFAULTADMIN@YAHOO.COM",
                             NormalizedUserName = "DEFAULTADMIN@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHyH1NbGY+A3AoHM2JAPvoNaL27+sJ9uB9uLVOduZEfKph1Q6RBkCnQnOFZWucNOOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBv9m+6PyEFHKBGWnGLc2Kc8mUPh2P/5MY6qX9j/K2Sx0wI98yM3JGWB8byagoVmZA==",
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0c8a31f2-5b08-40dc-993d-e434f1486935",
+                            SecurityStamp = "589a9d76-59c8-4d5f-993a-f0523c5a8564",
                             TwoFactorEnabled = false,
                             UserName = "defaultAdmin@yahoo.com"
                         },
@@ -160,7 +161,7 @@ namespace HouseholdManager.Migrations
                         {
                             Id = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "581bc7df-db1c-4c08-abdb-df2aa311cc96",
+                            ConcurrencyStamp = "1081641b-e0a2-43e9-8526-3f029e8382e1",
                             DisplayName = "",
                             Email = "defaultUser@yahoo.com",
                             EmailConfirmed = false,
@@ -170,10 +171,10 @@ namespace HouseholdManager.Migrations
                             MemberType = "Member",
                             NormalizedEmail = "DEFAULTUSER@YAHOO.COM",
                             NormalizedUserName = "DEFAULTUSER@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGEMivR+UZPZwK3SLUw8TrzbJkhOBta3CXPxMnbx5VDEnKFUrLPuo5k4BcVR4sAzDQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF7Qnk2VmgqbZarEZJawdLX4hCyR189tyrk21+ey0ADOccd4vDDwPqKYoKZmvqN0Vg==",
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "80ae73ef-86fe-45fa-b33c-84d88aa04dd6",
+                            SecurityStamp = "6f717310-82bf-466e-8b55-1fa598b11a90",
                             TwoFactorEnabled = false,
                             UserName = "defaultUser@yahoo.com"
                         });
@@ -201,7 +202,6 @@ namespace HouseholdManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Point")
@@ -224,7 +224,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 1,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1442),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3898),
                             HouseholdId = 1,
                             MemberId = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             Name = "Wash dishes",
@@ -234,7 +235,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 2,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1480),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3941),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Make bed",
@@ -244,7 +246,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 3,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1490),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3951),
                             HouseholdId = 1,
                             MemberId = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             Name = "Make bed",
@@ -254,7 +257,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 4,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1499),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3961),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Mow lawn",
@@ -264,7 +268,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 5,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1510),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3971),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Make dinner",
@@ -281,6 +286,9 @@ namespace HouseholdManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("DirtLevel")
+                        .HasColumnType("int");
+
                     b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
@@ -291,7 +299,6 @@ namespace HouseholdManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
@@ -304,6 +311,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 1,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🥄",
                             Name = "Kitchen"
@@ -311,6 +319,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 2,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🧻",
                             Name = "Bathroom"
@@ -318,6 +327,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 3,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Master Bedroom"
@@ -325,6 +335,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 4,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛋",
                             Name = "Living Room"
@@ -332,6 +343,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 5,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Bedroom"
@@ -339,6 +351,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 6,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Guest Bedroom"
@@ -346,6 +359,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 7,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🧻",
                             Name = "Master Bathroom"
@@ -353,6 +367,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 8,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🍽",
                             Name = "Dining Room"
@@ -360,6 +375,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 9,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🌳",
                             Name = "Yard"

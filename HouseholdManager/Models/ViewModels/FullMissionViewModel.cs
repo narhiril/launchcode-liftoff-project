@@ -34,8 +34,8 @@ namespace HouseholdManager.Models.ViewModels
                                     string? room, 
                                     string? roomIcon) : base(mission)
         {
-            RoomName = (room is null) ? string.Empty : room;
-            RoomIcon = (roomIcon is null) ? string.Empty : roomIcon;
+            Name = (room is null) ? string.Empty : room;
+            Icon = (roomIcon is null) ? string.Empty : roomIcon;
             MemberName = (member is null) ? string.Empty : member;
             MemberIcon = (memberIcon is null) ? string.Empty : memberIcon;
         }
@@ -49,6 +49,6 @@ namespace HouseholdManager.Models.ViewModels
         [DisplayName("Room")]
         public string RoomName { get; set; }
 
-        public string RoomIcon { get; set;}
+        public string RoomIcon { get; set; }
     }
 }

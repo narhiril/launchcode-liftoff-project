@@ -18,8 +18,8 @@ namespace HouseholdManager.Models.ViewModels
 
         public MissionViewModel(Mission mission) 
         {
-            MissionId = mission.MissionId;
-            MissionName = mission.MissionName;
+            MissionId = mission.Id;
+            MissionName = mission.Name;
             Point = mission.Point;
             DueDate = mission.DueDate;
             RoomName = mission.Room?.Name ?? string.Empty;

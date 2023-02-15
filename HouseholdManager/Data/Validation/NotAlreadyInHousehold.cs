@@ -22,8 +22,8 @@ namespace HouseholdManager.Data.Validation
             if (newHouseholdId <= 0) return new ValidationResult("Invalid Household ID");
 
             //this probably ought to be refactored later to use user id instead of name
-            Member? match = (from m in dbContext.Members.Include(u => u.User)
-                             where m.UserName == member.UserName
+            Member? match = (from m in dbContext.Members
+                             where m.Id == member.Id
                              select m).FirstOrDefault();
             //No member found = identity user has not been assigned a profile yet, which is ok
             if (match is null) return ValidationResult.Success;

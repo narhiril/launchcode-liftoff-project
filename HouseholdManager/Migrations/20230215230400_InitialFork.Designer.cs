@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseholdManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
-    [Migration("20230131022840_DashFix")]
-    partial class DashFix
-========
-    [Migration("20230201034523_IconCharacterFix")]
-    partial class IconCharacterFix
->>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
+    [Migration("20230215230400_InitialFork")]
+    partial class InitialFork
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,183 +30,7 @@ namespace HouseholdManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-========
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HouseholdId"), 1L, 1);
-
-                    b.Property<string>("HouseholdName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("HouseholdId");
-
-                    b.ToTable("Households");
-
-                    b.HasData(
-                        new
-                        {
-                            HouseholdId = 1,
-                            HouseholdName = "DefaultHousehold",
-                            Icon = ""
-                        });
-                });
-
-            modelBuilder.Entity("HouseholdManager.Models.Member", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberId"), 1L, 1);
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("MemberType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MemberId");
-
-                    b.HasIndex("HouseholdId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Members");
-
-                    b.HasData(
-                        new
-                        {
-                            MemberId = 1,
-                            HouseholdId = 1,
-                            Icon = "👩‍🔧",
-                            MemberType = "Admin",
-                            UserName = "defaultAdmin@yahoo.com"
-                        },
-                        new
-                        {
-                            MemberId = 2,
-                            HouseholdId = 1,
-                            Icon = "👩‍💼",
-                            MemberType = "Member",
-                            UserName = "defaultUser@yahoo.com"
-                        });
-                });
-
-            modelBuilder.Entity("HouseholdManager.Models.Mission", b =>
-                {
-                    b.Property<int>("MissionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MissionId"), 1L, 1);
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MissionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Point")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MissionId");
-
-                    b.HasIndex("MemberId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Missions");
-
-                    b.HasData(
-                        new
-                        {
-                            MissionId = 1,
-                            Completed = false,
-                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9822),
-                            MemberId = 2,
-                            MissionName = "Wash dishes",
-                            Point = 2,
-                            RoomId = 1
-                        },
-                        new
-                        {
-                            MissionId = 2,
-                            Completed = false,
-                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9860),
-                            MemberId = 1,
-                            MissionName = "Make bed",
-                            Point = 1,
-                            RoomId = 5
-                        },
-                        new
-                        {
-                            MissionId = 3,
-                            Completed = false,
-                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9870),
-                            MemberId = 2,
-                            MissionName = "Make bed",
-                            Point = 1,
-                            RoomId = 3
-                        },
-                        new
-                        {
-                            MissionId = 4,
-                            Completed = false,
-                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9879),
-                            MemberId = 1,
-                            MissionName = "Mow lawn",
-                            Point = 5,
-                            RoomId = 9
-                        },
-                        new
-                        {
-                            MissionId = 5,
-                            Completed = false,
-                            DueDate = new DateTime(2023, 1, 31, 21, 45, 23, 545, DateTimeKind.Local).AddTicks(9889),
-                            MemberId = 1,
-                            MissionName = "Make dinner",
-                            Point = 4,
-                            RoomId = 1
-                        });
-                });
-
-            modelBuilder.Entity("HouseholdManager.Models.Room", b =>
-                {
-                    b.Property<int>("RoomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"), 1L, 1);
->>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
 
                     b.Property<string>("Icon")
                         .IsRequired()
@@ -220,6 +39,7 @@ namespace HouseholdManager.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
@@ -264,7 +84,7 @@ namespace HouseholdManager.Migrations
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -322,7 +142,7 @@ namespace HouseholdManager.Migrations
                         {
                             Id = "a1addd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1729b34-06ae-4d71-b95e-34a5910d9c74",
+                            ConcurrencyStamp = "1dd033ce-627f-479c-9152-9452d49fabbb",
                             DisplayName = "",
                             Email = "defaultAdmin@yahoo.com",
                             EmailConfirmed = false,
@@ -332,10 +152,10 @@ namespace HouseholdManager.Migrations
                             MemberType = "Admin",
                             NormalizedEmail = "DEFAULTADMIN@YAHOO.COM",
                             NormalizedUserName = "DEFAULTADMIN@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHyH1NbGY+A3AoHM2JAPvoNaL27+sJ9uB9uLVOduZEfKph1Q6RBkCnQnOFZWucNOOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBv9m+6PyEFHKBGWnGLc2Kc8mUPh2P/5MY6qX9j/K2Sx0wI98yM3JGWB8byagoVmZA==",
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0c8a31f2-5b08-40dc-993d-e434f1486935",
+                            SecurityStamp = "589a9d76-59c8-4d5f-993a-f0523c5a8564",
                             TwoFactorEnabled = false,
                             UserName = "defaultAdmin@yahoo.com"
                         },
@@ -343,7 +163,7 @@ namespace HouseholdManager.Migrations
                         {
                             Id = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "581bc7df-db1c-4c08-abdb-df2aa311cc96",
+                            ConcurrencyStamp = "1081641b-e0a2-43e9-8526-3f029e8382e1",
                             DisplayName = "",
                             Email = "defaultUser@yahoo.com",
                             EmailConfirmed = false,
@@ -353,10 +173,10 @@ namespace HouseholdManager.Migrations
                             MemberType = "Member",
                             NormalizedEmail = "DEFAULTUSER@YAHOO.COM",
                             NormalizedUserName = "DEFAULTUSER@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGEMivR+UZPZwK3SLUw8TrzbJkhOBta3CXPxMnbx5VDEnKFUrLPuo5k4BcVR4sAzDQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF7Qnk2VmgqbZarEZJawdLX4hCyR189tyrk21+ey0ADOccd4vDDwPqKYoKZmvqN0Vg==",
                             PhoneNumber = "111-222-3333",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "80ae73ef-86fe-45fa-b33c-84d88aa04dd6",
+                            SecurityStamp = "6f717310-82bf-466e-8b55-1fa598b11a90",
                             TwoFactorEnabled = false,
                             UserName = "defaultUser@yahoo.com"
                         });
@@ -369,6 +189,9 @@ namespace HouseholdManager.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
@@ -403,7 +226,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 1,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1442),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3898),
                             HouseholdId = 1,
                             MemberId = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             Name = "Wash dishes",
@@ -413,7 +237,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 2,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1480),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3941),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Make bed",
@@ -423,7 +248,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 3,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1490),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3951),
                             HouseholdId = 1,
                             MemberId = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
                             Name = "Make bed",
@@ -433,7 +259,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 4,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1499),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3961),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Mow lawn",
@@ -443,7 +270,8 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 5,
-                            DueDate = new DateTime(2023, 1, 30, 20, 28, 39, 926, DateTimeKind.Local).AddTicks(1510),
+                            Completed = false,
+                            DueDate = new DateTime(2023, 2, 15, 17, 4, 0, 661, DateTimeKind.Local).AddTicks(3971),
                             HouseholdId = 1,
                             MemberId = "a1addd14-6340-4840-95c2-db12554843e5",
                             Name = "Make dinner",
@@ -460,13 +288,16 @@ namespace HouseholdManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("DirtLevel")
+                        .HasColumnType("int");
+
                     b.Property<int>("HouseholdId")
                         .HasColumnType("int");
 
                     b.Property<string>("Icon")
                         .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -482,6 +313,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 1,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🥄",
                             Name = "Kitchen"
@@ -489,6 +321,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 2,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🧻",
                             Name = "Bathroom"
@@ -496,6 +329,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 3,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Master Bedroom"
@@ -503,6 +337,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 4,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛋",
                             Name = "Living Room"
@@ -510,6 +345,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 5,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Bedroom"
@@ -517,6 +353,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 6,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🛏",
                             Name = "Guest Bedroom"
@@ -524,6 +361,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 7,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🧻",
                             Name = "Master Bathroom"
@@ -531,6 +369,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 8,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🍽",
                             Name = "Dining Room"
@@ -538,6 +377,7 @@ namespace HouseholdManager.Migrations
                         new
                         {
                             Id = 9,
+                            DirtLevel = 0,
                             HouseholdId = 1,
                             Icon = "🌳",
                             Name = "Yard"
@@ -612,110 +452,6 @@ namespace HouseholdManager.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-<<<<<<<< HEAD:HouseholdManager/Migrations/20230131022840_DashFix.Designer.cs
-========
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a1addd14-6340-4840-95c2-db12554843e5",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ab3eeed0-defd-41e9-b1bd-36661b62829d",
-                            Email = "defaultAdmin@yahoo.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "DEFAULTADMIN@YAHOO.COM",
-                            NormalizedUserName = "DEFAULTADMIN@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENFo9vgxEGXoObDLtNeg1E4EAhglostSfvFOkO49dwmG408JAN2qbOfAk4yM/8pG+A==",
-                            PhoneNumber = "111-222-3333",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8bbd6713-9a6a-4572-a0a2-7f159540fba0",
-                            TwoFactorEnabled = false,
-                            UserName = "defaultAdmin@yahoo.com"
-                        },
-                        new
-                        {
-                            Id = "u1ua87c6-b718-4f48-90a2-458e0a2443e6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "87e350eb-1d91-4711-96d9-f9c46cf314fe",
-                            Email = "defaultUser@yahoo.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "DEFAULTUSER@YAHOO.COM",
-                            NormalizedUserName = "DEFAULTUSER@YAHOO.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK5S9m0kGIvt8YgHuLX9cGIRE8T2ZlaAZJL8V3rcHEh+EHGunYODzGG/LClIuugq6w==",
-                            PhoneNumber = "111-222-3333",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "33ca19e6-a47d-4a14-b372-519aa161a80d",
-                            TwoFactorEnabled = false,
-                            UserName = "defaultUser@yahoo.com"
-                        });
-                });
-
->>>>>>>> feee6616549db05ee9b8a478a1a17fefba228848:HouseholdManager/Migrations/20230201034523_IconCharacterFix.Designer.cs
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")

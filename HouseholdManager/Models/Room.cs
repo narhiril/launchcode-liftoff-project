@@ -21,8 +21,6 @@ namespace HouseholdManager.Models
         public Household Household { get; set; }
         public int HouseholdId { get; set; }
 
-        [Range(0, 10, ErrorMessage = "Dirt level must be between 0 and 10.")]
-        [DisplayName("Dirt-O-Meter")]
         public int DirtLevel { get; set; } = 0;
     }
 }

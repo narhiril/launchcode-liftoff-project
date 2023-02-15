@@ -2,12 +2,12 @@
 @using HouseholdManager.Data.API
 
 @{
-    ViewData["Title"] = Model.RoomName + " Details";
+    ViewData["Title"] = Model.Name + " Details";
     var req = new IconRequestor();
-    string iconMouseOverText = await req.GetMouseoverTextForIcon(Model.RoomIcon,(IEnumerable<Icon>)ViewBag.Icons);
+    string iconMouseOverText = await req.GetMouseoverTextForIcon(Model.Icon,(IEnumerable<Icon>)ViewBag.Icons);
 }
 
-<h1><span class="icon-font" title=@iconMouseOverText>@Model.RoomIcon</span> @Model.RoomName</h1>
+<h1><span class="icon-font" title=@iconMouseOverText>@Model.Icon</span> @Model.Name</h1>
 @await Html.PartialAsync("_CreationButtonsPartial")
 
 
@@ -32,7 +32,7 @@
     </dl>
     <table class="table-bordered table-responsive table-hover">
         <tr>
-            <th>Missions In @Model.RoomName</th>
+            <th>Missions In @Model.Name</th>
         
             <th>Point Value</th>
        
@@ -41,7 +41,7 @@
             @foreach (Mission item in Model.Missions)
             {
             <tr>
-                <td>@item.MissionName</td>
+                <td>@item.Name</td>
                 
                     <td>@item.Point</td>
                 

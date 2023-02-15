@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace HouseholdManager.Models.ViewModels
 {
@@ -18,6 +17,7 @@ namespace HouseholdManager.Models.ViewModels
             Point = mission.Point;
             DueDate = mission.DueDate;
             RoomId = mission.RoomId;
+            Completed = mission.Completed;
         }
 
         public EditMissionViewModel(int id, Mission mission)
@@ -28,6 +28,7 @@ namespace HouseholdManager.Models.ViewModels
             Point = mission.Point;
             DueDate = mission.DueDate;
             RoomId = mission.RoomId;
+            Completed = mission.Completed;
         }
 
         public int? Id { get; set; }
@@ -48,6 +49,8 @@ namespace HouseholdManager.Models.ViewModels
         [DisplayName("Due Date")]
         [Required]
         public DateTime DueDate { get; set; }
+
+        public bool Completed { get; set; } = false;
 
         public string? MemberId { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HouseholdManager.Models.ViewModels
@@ -41,5 +42,9 @@ namespace HouseholdManager.Models.ViewModels
 
         [StringLength(5, ErrorMessage = "Invalid icon.")]
         public string Icon { get; set; }
+
+        [Range(0, 10, ErrorMessage = "Dirt level must be between 0 and 10.")]
+        [DisplayName("Dirt-O-Meter")]
+        public int DirtLevel { get; set; } = 0;
     }
 }

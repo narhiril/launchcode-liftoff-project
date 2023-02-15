@@ -1,4 +1,4 @@
-﻿@model HouseholdManager.Models.Member
+﻿@model HouseholdManager.Models.ViewModels.MemberViewModel
 @using HouseholdManager.Data.API
 
 @{
@@ -15,10 +15,10 @@
     <hr class="homepage-break">
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.MemberDisplayName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.MemberDisplayName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Icon)
@@ -29,19 +29,21 @@
                 <label class="icon-slug-display-small">@iconMouseOverText</label>
             </span>
         </dd>
+        @*
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Household.HouseholdName)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Household.HouseholdNameWithIcon)
         </dd>
+        *@
     </dl>
 </div>
 
 <div class="row">
     <div class="col-md-12">
         <div class="p-4">
-            <h5 class="fw-bold">@Model.MemberUserNameWithIcon's Missions</h5>
+            <h5 class="fw-bold">@Model.MemberDisplayName's Missions</h5>
 
 
             <div class="control-section">

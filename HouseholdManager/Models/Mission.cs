@@ -36,6 +36,4 @@ namespace HouseholdManager.Models
         public bool Completed { get; set; } = false;
     }
 
-    }
-
 }

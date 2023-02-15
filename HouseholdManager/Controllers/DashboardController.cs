@@ -5,7 +5,6 @@ using HouseholdManager.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HouseholdManager.Models.ViewModels;
 
 namespace HouseholdManager.Controllers
 {
@@ -72,7 +71,7 @@ namespace HouseholdManager.Controllers
                 .GroupBy(j => j.MemberId)
                 .Select(k => new
                 {
-                    memberNameWithIcon = k.First().Member.Icon + " " + k.First().Member.DisplayName,
+                    memberNameWithIcon = k.First().Member.Icon + " " + k.First().Member.MemberDisplayName,
                     amount = k.Sum(j => j.Point),
                     formattedAmount = k.Sum(j => j.Point).ToString("0"),
                 })

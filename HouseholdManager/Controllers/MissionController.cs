@@ -270,7 +270,7 @@ namespace HouseholdManager.Controllers
         {
             var members = await _memberService.GetCurrentHouseholdMembers();
             return (from member in members
-                    select new ListMemberViewModel(member.Id, member.UserNameWithIcon!)).ToList();
+                    select new ListMemberViewModel(member.Id, member.DisplayName)).ToList();
         }
 
         [NonAction]
