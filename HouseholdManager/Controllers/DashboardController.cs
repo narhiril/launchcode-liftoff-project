@@ -54,6 +54,7 @@ namespace HouseholdManager.Controllers
             foreach (var memberMissionData in dataQuery)
             {
                 var member = members.Find(x => x.Id == memberMissionData.Key);
+                if (member is null) continue;
                 dashboardData.Add(new DashboardViewModel
                 {
                     MemberIcon = member.Icon,

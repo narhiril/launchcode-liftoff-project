@@ -14,19 +14,23 @@ using HouseholdManager.Models.ViewModels;
 namespace HouseholdManager.Controllers
 {
     [Authorize(Roles = "Administrator,User")]
-    public class HouseholdController : Controller, IRequestIcons
+    public class HouseholdController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Member> _userManager;
         private readonly IQueryMembers _memberService;
+        private readonly IRequestIcons _iconService;
 
         public HouseholdController(ApplicationDbContext context,
                                   UserManager<Member> userManager,
-                                  IQueryMembers memberService)
+                                  IQueryMembers memberService,
+                                  IRequestIcons iconService)
+                                  
         {
             _userManager = userManager;
             _context = context;
             _memberService = memberService;
+            _iconService = iconService;
         }
 
         //GET: Household
@@ -69,7 +73,7 @@ namespace HouseholdManager.Controllers
         //GET: Household/Setup
         public async Task<IActionResult> Setup()
         {
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(new EditHouseholdViewModel());
         }
 
@@ -102,7 +106,7 @@ namespace HouseholdManager.Controllers
             }
             else
             {
-                await PopulateIcons();
+                ViewBag.Icons = await _iconService.PopulateIcons();
                 return View(model);
             }
         }
@@ -110,7 +114,7 @@ namespace HouseholdManager.Controllers
         // GET: Household/Edit/{id}
         public async Task<IActionResult> Edit(int id = 0)
         {
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             if (id < 1)
             {
                 return RedirectToAction(nameof(Index));
@@ -161,7 +165,7 @@ namespace HouseholdManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(model);
         }
 
@@ -183,14 +187,6 @@ namespace HouseholdManager.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        [NonAction]
-        public async Task PopulateIcons()
-        {
-            IconRequestor req = new IconRequestor();
-            List<Icon> icons = await req.GetIconsFromApi();
-            ViewBag.Icons = icons;
         }
 
         [NonAction]

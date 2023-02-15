@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace HouseholdManager.Data.Services
 {
     //TODO: Add serverside validation, register service in program.cs
-    public class HouseholdValidationService : IValidateHousehold
+    public class HouseholdValidationService
     {
         private readonly UserManager<Member> _userManager;
         private readonly ApplicationDbContext _context;

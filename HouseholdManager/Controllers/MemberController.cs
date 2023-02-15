@@ -15,16 +15,20 @@ using HouseholdManager.Models.ViewModels;
 namespace HouseholdManager.Controllers
 {
     [Authorize(Roles = "Administrator,User")]
-    public class MemberController : Controller, IRequestIcons
+    public class MemberController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IQueryMembers _memberService;
+        private readonly IRequestIcons _iconService;
 
         // TODO: Put this controller back together somehow
-        public MemberController(ApplicationDbContext context, IQueryMembers memberService)
+        public MemberController(ApplicationDbContext context, 
+                                IQueryMembers memberService,
+                                IRequestIcons iconService)
         {
             _context = context;
             _memberService = memberService;
+            _iconService = iconService;
         }
         
         // GET: Member
@@ -45,7 +49,7 @@ namespace HouseholdManager.Controllers
                 DisplayName = user.DisplayName ?? string.Empty,
                 Icon = user.Icon ?? string.Empty
             };
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(viewModel); 
         }
 
@@ -66,7 +70,7 @@ namespace HouseholdManager.Controllers
             else
             {
                 model.UserName = user.UserName;
-                await PopulateIcons();
+                ViewBag.Icons = await _iconService.PopulateIcons();
                 return View(model);
             }
         }
@@ -85,7 +89,7 @@ namespace HouseholdManager.Controllers
         {
             PopulateHouseholds();
             //PopulateIdentityUsers();
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             if (id == 0)
                 return View(new Member());
             else
@@ -110,7 +114,7 @@ namespace HouseholdManager.Controllers
             }
             PopulateHouseholds();
             //PopulateIdentityUsers();
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(member);
         }
 
@@ -143,15 +147,6 @@ namespace HouseholdManager.Controllers
             Household DefaultHousehold = new Household() { Id = 0, Name = "Choose a Household" };
             HouseholdCollection.Insert(0, DefaultHousehold);
             ViewBag.Households = HouseholdCollection;
-        }
-
-
-        [NonAction]
-        public async Task PopulateIcons()
-        {
-            IconRequestor req = new IconRequestor();
-            List<Icon> icons = await req.GetIconsFromApi();
-            ViewBag.Icons = icons;
         }
 
     }

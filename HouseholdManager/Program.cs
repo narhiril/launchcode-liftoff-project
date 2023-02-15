@@ -4,7 +4,6 @@ using HouseholdManager.Data.Services;
 using HouseholdManager.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +22,7 @@ builder.Services.AddIdentity<Member, IdentityRole>(options => options.SignIn.Req
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IQueryMembers, MemberService>();
+builder.Services.AddScoped<IRequestIcons, IconService>();
 
 //Register Syncfusion license
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VVhkQlFadVdJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxQdkRjWH5ZcHBRRmRbVE0=");

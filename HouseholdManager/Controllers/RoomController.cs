@@ -14,19 +14,22 @@ using HouseholdManager.Models.ViewModels;
 namespace HouseholdManager.Controllers
 {
     [Authorize(Roles = "Administrator,User")]
-    public class RoomController : Controller, IRequestIcons
+    public class RoomController : Controller
     {
-        private readonly IQueryMembers _memberService;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Member> _userManager;
+        private readonly IQueryMembers _memberService;
+        private readonly IRequestIcons _iconService;
 
         public RoomController(ApplicationDbContext context, 
                               UserManager<Member> userManager,
-                              IQueryMembers memberService)
+                              IQueryMembers memberService,
+                              IRequestIcons iconService)
         {
             _context = context;
             _userManager = userManager;
             _memberService = memberService;
+            _iconService = iconService;
         }
 
         // GET: Room
@@ -74,7 +77,7 @@ namespace HouseholdManager.Controllers
         // GET: Room/Create
         public async Task<IActionResult> Create()
         {
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View();
         }
 
@@ -106,7 +109,7 @@ namespace HouseholdManager.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(new EditRoomViewModel(model.Name, model.Icon));
         }
 
@@ -127,7 +130,7 @@ namespace HouseholdManager.Controllers
             {
                 return NotFound();
             }
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(new EditRoomViewModel(room));
         }
 
@@ -173,7 +176,7 @@ namespace HouseholdManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            await PopulateIcons();
+            ViewBag.Icons = await _iconService.PopulateIcons();
             return View(new EditRoomViewModel(room));
         }
 
